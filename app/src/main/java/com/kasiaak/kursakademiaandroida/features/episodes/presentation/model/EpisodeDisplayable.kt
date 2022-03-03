@@ -14,7 +14,7 @@ data class EpisodeDisplayable(
         id = episode.id,
         name = episode.name,
         airDate = episode.airDate,
-        code = episode.episode,
+        code = episode.code,
         characters = episode.characters,
         url = episode.url
     )
