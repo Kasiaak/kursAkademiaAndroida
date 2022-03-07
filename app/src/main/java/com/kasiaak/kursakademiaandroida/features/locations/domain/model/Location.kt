@@ -6,7 +6,5 @@ class Location(
     val type: String,
     val dimension: String,
     val residents: List<String>,
-    val url: String,
-    val created: String
-) {
-}
+    val url: String
+)

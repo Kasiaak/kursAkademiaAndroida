@@ -12,8 +12,7 @@ data class Character(
     val lastKnownLocation: CharacterLastKnownLocation,
     val image: String,
     val episode: List<String>,
-    val url: String,
-    val created: String
+    val url: String
 ) {
 
     data class CharacterOrigin(
