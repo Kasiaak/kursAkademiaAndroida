@@ -29,8 +29,7 @@ data class CharacterRemote(
         lastKnownLocation = characterLastKnownLocationRemote.toCharacterLastKnownLocation(),
         image = image,
         episode = episode,
-        url = url,
-        created = created
+        url = url
     )
 
     data class CharacterOriginRemote(
