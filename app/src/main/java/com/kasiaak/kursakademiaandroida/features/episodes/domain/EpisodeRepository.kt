@@ -1,4 +1,4 @@
-package com.kasiaak.kursakademiaandroida.features.episodes
+package com.kasiaak.kursakademiaandroida.features.episodes.domain
 
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
 
