@@ -1,4 +1,4 @@
-package com.kasiaak.kursakademiaandroida.features.data.remote.model
+package com.kasiaak.kursakademiaandroida.core.api.model
 
 import com.google.gson.annotations.SerializedName
 

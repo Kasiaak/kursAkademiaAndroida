@@ -1,7 +1,7 @@
 package com.kasiaak.kursakademiaandroida.core.di
 
 import com.kasiaak.kursakademiaandroida.BuildConfig
-import com.kasiaak.kursakademiaandroida.features.data.remote.RickAndMortyApi
+import com.kasiaak.kursakademiaandroida.core.api.RickAndMortyApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
