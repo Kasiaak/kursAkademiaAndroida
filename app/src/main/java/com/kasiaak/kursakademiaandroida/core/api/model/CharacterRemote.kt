@@ -1,4 +1,4 @@
-package com.kasiaak.kursakademiaandroida.features.data.remote.model
+package com.kasiaak.kursakademiaandroida.core.api.model
 
 import com.google.gson.annotations.SerializedName
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
@@ -18,6 +18,8 @@ data class CharacterRemote(
     @SerializedName("url") val url: String,
     @SerializedName("created") val created: String
 ) {
+    companion object
+
     fun toCharacter() = Character(
         id = id,
         name = name,
@@ -36,6 +38,8 @@ data class CharacterRemote(
         @SerializedName("name") val name: String,
         @SerializedName("url") val url: String
     ) {
+        companion object
+
         fun toCharacterOrigin() = Character.CharacterOrigin(
             name = name,
             url = url
@@ -46,6 +50,8 @@ data class CharacterRemote(
         @SerializedName("name") val name: String,
         @SerializedName("url") val url: String
     ) {
+        companion object
+
         fun toCharacterLastKnownLocation() = Character.CharacterLastKnownLocation(
             name = name,
             url = url
