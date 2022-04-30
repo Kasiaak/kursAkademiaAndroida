@@ -5,6 +5,7 @@ import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.Cha
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterLastKnownLocationCached
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterOriginCached
 import com.kasiaak.kursakademiaandroida.features.episodes.data.local.model.EpisodeCached
+import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
 import com.kasiaak.kursakademiaandroida.features.locations.data.local.model.LocationCached
 import org.jetbrains.annotations.TestOnly
 
@@ -129,4 +130,14 @@ fun CharacterCached.Companion.mock() = CharacterCached(
     image = "character image",
     episode = emptyList(),
     url = "character url"
+)
+
+@TestOnly
+fun Episode.Companion.mock() = Episode(
+    id = 1,
+    name = "episode name",
+    airDate = "episode air date",
+    code = "episode code",
+    characters = emptyList(),
+    url = "episode url"
 )
