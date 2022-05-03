@@ -1,6 +1,8 @@
 package com.kasiaak.kursakademiaandroida.features.characters.presentation.model
 
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
 
 
 data class CharacterDisplayable(
@@ -35,7 +37,7 @@ data class CharacterDisplayable(
         val name: String,
         val url: String
     ) {
-        constructor(characterOrigin: Character.CharacterOrigin) : this(
+        constructor(characterOrigin: CharacterOrigin) : this(
             name = characterOrigin.name,
             url = characterOrigin.url
         )
@@ -45,7 +47,7 @@ data class CharacterDisplayable(
         val name: String,
         val url: String
     ) {
-        constructor(characterLastKnownLocation: Character.CharacterLastKnownLocation) : this(
+        constructor(characterLastKnownLocation: CharacterLastKnownLocation) : this(
             name = characterLastKnownLocation.name,
             url = characterLastKnownLocation.url
         )

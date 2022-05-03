@@ -4,9 +4,13 @@ import com.kasiaak.kursakademiaandroida.core.api.model.*
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterCached
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterLastKnownLocationCached
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterOriginCached
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
 import com.kasiaak.kursakademiaandroida.features.episodes.data.local.model.EpisodeCached
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
 import com.kasiaak.kursakademiaandroida.features.locations.data.local.model.LocationCached
+import com.kasiaak.kursakademiaandroida.features.locations.domain.model.Location
 import org.jetbrains.annotations.TestOnly
 
 @TestOnly
@@ -140,4 +144,41 @@ fun Episode.Companion.mock() = Episode(
     code = "episode code",
     characters = emptyList(),
     url = "episode url"
+)
+
+@TestOnly
+fun Character.Companion.mock() = Character(
+    id = 1,
+    name = "character name",
+    status = "character status",
+    species = "character species",
+    type = "character type",
+    gender = "character gender",
+    origin = CharacterOrigin.Companion.mock(),
+    lastKnownLocation = CharacterLastKnownLocation.Companion.mock(),
+    image = "character image",
+    episode = emptyList(),
+    url = "character url"
+)
+
+@TestOnly
+fun CharacterLastKnownLocation.Companion.mock() = CharacterLastKnownLocation(
+    name = "character last known location name",
+    url = "character last known location url"
+)
+
+@TestOnly
+fun CharacterOrigin.Companion.mock() = CharacterOrigin(
+    name = "character origin name",
+    url = "character origin url"
+)
+
+@TestOnly
+fun Location.Companion.mock() = Location(
+    id = 1,
+    name = "location name",
+    type = "location type",
+    dimension = "location dimension",
+    residents = emptyList(),
+    url = "location url"
 )

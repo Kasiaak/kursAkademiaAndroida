@@ -4,6 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
 
 @Entity(tableName = "character")
 data class CharacterCached(
@@ -58,14 +60,14 @@ data class CharacterOriginCached(
     val characterOriginName: String,
     val characterOriginUrl: String
 ) {
-    constructor(characterOrigin: Character.CharacterOrigin) : this(
+    constructor(characterOrigin: CharacterOrigin) : this(
         characterOrigin.name,
         characterOrigin.url
     )
 
     companion object
 
-    fun toCharacterOrigin() = Character.CharacterOrigin(
+    fun toCharacterOrigin() = CharacterOrigin(
         name = characterOriginName,
         url = characterOriginUrl
     )
@@ -76,14 +78,14 @@ data class CharacterLastKnownLocationCached(
     val characterLastKnownLocationName: String,
     val characterLastKnownLocationUrl: String
 ) {
-    constructor(characterLastKnownLocationCached: Character.CharacterLastKnownLocation) : this(
+    constructor(characterLastKnownLocationCached: CharacterLastKnownLocation) : this(
         characterLastKnownLocationCached.name,
         characterLastKnownLocationCached.url
     )
 
     companion object
 
-    fun toCharacterLastKnownLocation() = Character.CharacterLastKnownLocation(
+    fun toCharacterLastKnownLocation() = CharacterLastKnownLocation(
         name = characterLastKnownLocationName,
         url = characterLastKnownLocationUrl
     )
