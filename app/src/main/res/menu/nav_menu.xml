@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navbar_episodes"
+        android:title="@string/menu_episodes"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24" />
+    <item
+        android:id="@+id/navbar_characters"
+        android:title="@string/menu_characters"
+        android:icon="@drawable/ic_baseline_person_24" />
+    <item
+        android:id="@+id/navbar_locations"
+        android:title="@string/menu_locations"
+        android:icon="@drawable/ic_baseline_map_24" />
+</menu>
