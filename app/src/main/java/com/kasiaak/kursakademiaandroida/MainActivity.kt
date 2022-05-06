@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kasiaak.kursakademiaandroida.features.characters.presentation.CharacterFragment
 import com.kasiaak.kursakademiaandroida.features.episodes.presentation.EpisodeFragment
 import com.kasiaak.kursakademiaandroida.features.locations.presentation.LocationFragment
 
@@ -23,10 +24,12 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemReselectedListener
                 }
                 R.id.navbar_characters -> {
-                    // loadFragment()
+                    loadFragment(CharacterFragment())
+                    return@setOnItemReselectedListener
                 }
                 R.id.navbar_locations -> {
                     loadFragment(LocationFragment())
+                    return@setOnItemReselectedListener
                 }
             }
         }
