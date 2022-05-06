@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kasiaak.kursakademiaandroida.features.episodes.presentation.EpisodeFragment
+import com.kasiaak.kursakademiaandroida.features.locations.presentation.LocationFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,22 +19,22 @@ class MainActivity : AppCompatActivity() {
         bottomNavbar.setOnItemReselectedListener {
             when (it.itemId) {
                 R.id.navbar_episodes -> {
-                    loadFragment(R.id.episode_container, EpisodeFragment())
+                    loadFragment(EpisodeFragment())
                     return@setOnItemReselectedListener
                 }
                 R.id.navbar_characters -> {
                     // loadFragment()
                 }
                 R.id.navbar_locations -> {
-                    //loadFragment()
+                    loadFragment(LocationFragment())
                 }
             }
         }
 
     }
 
-    private fun loadFragment(containerViewId: Int, fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(containerViewId, fragment)
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
     }
