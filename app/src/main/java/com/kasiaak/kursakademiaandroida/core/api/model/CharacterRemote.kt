@@ -2,6 +2,8 @@ package com.kasiaak.kursakademiaandroida.core.api.model
 
 import com.google.gson.annotations.SerializedName
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
+import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
 
 
 data class CharacterRemote(
@@ -40,7 +42,7 @@ data class CharacterRemote(
     ) {
         companion object
 
-        fun toCharacterOrigin() = Character.CharacterOrigin(
+        fun toCharacterOrigin() = CharacterOrigin(
             name = name,
             url = url
         )
@@ -52,7 +54,7 @@ data class CharacterRemote(
     ) {
         companion object
 
-        fun toCharacterLastKnownLocation() = Character.CharacterLastKnownLocation(
+        fun toCharacterLastKnownLocation() = CharacterLastKnownLocation(
             name = name,
             url = url
         )

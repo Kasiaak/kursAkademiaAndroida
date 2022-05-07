@@ -15,13 +15,19 @@ data class Character(
     val url: String
 ) {
 
-    data class CharacterOrigin(
-        val name: String,
-        val url: String
-    )
+    companion object
+}
 
-    data class CharacterLastKnownLocation(
-        val name: String,
-        val url: String
-    )
+data class CharacterOrigin(
+    val name: String,
+    val url: String
+) {
+    companion object
+}
+
+data class CharacterLastKnownLocation(
+    val name: String,
+    val url: String
+) {
+    companion object
 }
