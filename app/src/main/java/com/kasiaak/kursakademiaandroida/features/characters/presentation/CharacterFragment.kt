@@ -43,7 +43,7 @@ class CharacterFragment : BaseFragment<CharacterViewModel>(R.layout.fragment_cha
     private fun observeCharacters() {
         viewModel.characters.observe(this) {
             //display characters
-            characterAdapter.submitList(ArrayList(it))
+            characterAdapter.submitList(it)
         }
     }
 }

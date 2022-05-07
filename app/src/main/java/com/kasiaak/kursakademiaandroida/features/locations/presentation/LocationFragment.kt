@@ -44,7 +44,7 @@ class LocationFragment : BaseFragment<LocationViewModel>(R.layout.fragment_locat
     private fun observeLocations() {
         viewModel.locations.observe(this) {
             //display locations
-            locationAdapter.submitList(ArrayList(it))
+            locationAdapter.submitList(it)
         }
     }
 }
