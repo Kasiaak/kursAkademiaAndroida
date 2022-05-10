@@ -23,5 +23,5 @@ val appModule = module {
     factory { androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
     factory<NetworkStateProvider> { NetworkStateProviderImpl(get()) }
     factory<ErrorWrapper> { ErrorWrapperImpl() }
-    factory<ErrorMapper> { ErrorMapperImpl(get()) }
+    factory<ErrorMapper> { ErrorMapperImpl(androidContext()) }
 }
