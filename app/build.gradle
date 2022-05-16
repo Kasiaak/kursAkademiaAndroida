@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'de.mannodermaus.android-junit5'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 apply from: '../dependencies.gradle'
 
@@ -62,6 +63,7 @@ dependencies {
     //Room database
     implementation roomDependency
     implementation roomKtxDependency
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt roomKaptDependency
 
     //test dependencies

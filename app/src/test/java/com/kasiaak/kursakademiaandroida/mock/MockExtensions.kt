@@ -7,6 +7,7 @@ import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.Cha
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 import com.kasiaak.kursakademiaandroida.features.episodes.data.local.model.EpisodeCached
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
 import com.kasiaak.kursakademiaandroida.features.locations.data.local.model.LocationCached
@@ -181,4 +182,14 @@ fun Location.Companion.mock() = Location(
     dimension = "location dimension",
     residents = emptyList(),
     url = "location url"
+)
+
+@TestOnly
+fun EpisodeDisplayable.Companion.mock() = EpisodeDisplayable(
+    id = 1,
+    name = "episode name",
+    airDate = "episode air date",
+    code = "episode code",
+    characters = emptyList(),
+    url = "episode url"
 )

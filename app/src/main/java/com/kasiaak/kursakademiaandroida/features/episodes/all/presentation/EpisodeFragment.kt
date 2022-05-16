@@ -1,7 +1,8 @@
-package com.kasiaak.kursakademiaandroida.features.episodes.presentation
+package com.kasiaak.kursakademiaandroida.features.episodes.all.presentation
 
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kasiaak.kursakademiaandroida.R
@@ -23,6 +24,12 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel>(R.layout.fragment_episode
             adapter = episodeAdapter
             layoutManager = LinearLayoutManager(context)
         }
+        recyclerView?.addItemDecoration(
+            DividerItemDecoration(
+                recyclerView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         progressBar = view?.findViewById(R.id.episode_progress_bar)
     }
 

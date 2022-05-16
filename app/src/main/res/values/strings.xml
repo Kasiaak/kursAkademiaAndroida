@@ -8,4 +8,9 @@
     <string name="error_internal">Server-side problem, please try again later</string>
     <string name="error_bad_request">Validation error, check input parameters</string>
     <string name="error_unknown">Something went wrong</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_episodes">Episodes</string>
+    <string name="title_characters">Characters</string>
+    <string name="title_locations">Locations</string>
+    <string name="title_episode_details">"Episode details "</string>
 </resources>

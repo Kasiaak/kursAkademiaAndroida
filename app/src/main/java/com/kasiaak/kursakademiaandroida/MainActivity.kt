@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kasiaak.kursakademiaandroida.features.characters.presentation.CharacterFragment
-import com.kasiaak.kursakademiaandroida.features.episodes.presentation.EpisodeFragment
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.EpisodeFragment
 import com.kasiaak.kursakademiaandroida.features.locations.presentation.LocationFragment
 
 class MainActivity : AppCompatActivity() {

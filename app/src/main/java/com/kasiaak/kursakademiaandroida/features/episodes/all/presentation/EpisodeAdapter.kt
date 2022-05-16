@@ -1,13 +1,12 @@
-package com.kasiaak.kursakademiaandroida.features.episodes.presentation
+package com.kasiaak.kursakademiaandroida.features.episodes.all.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.kasiaak.kursakademiaandroida.features.episodes.presentation.model.EpisodeDisplayable
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 
-class EpisodeAdapter :
-    ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(EpisodeDiffCallback) {
+class EpisodeAdapter() : ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(EpisodeDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val inflater = LayoutInflater.from(parent.context)

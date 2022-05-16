@@ -3,8 +3,12 @@ package com.kasiaak.kursakademiaandroida.features.episodes.presentation
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.kasiaak.kursakademiaandroida.core.base.UiState
+import com.kasiaak.kursakademiaandroida.core.exception.ErrorMapper
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.EpisodeViewModel
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.GetEpisodesUseCase
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
+import com.kasiaak.kursakademiaandroida.features.episodes.navigation.EpisodeNavigator
 import com.kasiaak.kursakademiaandroida.mock.mock
 import com.kasiaak.kursakademiaandroida.utils.ViewModelTest
 import com.kasiaak.kursakademiaandroida.utils.getOrAwaitValue
@@ -18,10 +22,28 @@ import org.junit.jupiter.api.Test
 internal class EpisodeViewModelTest : ViewModelTest() {
 
     @Test
+    fun `WHEN episode is clisked THEN open episode details screen`() {
+        //given
+        val useCase = mockk<GetEpisodesUseCase>(relaxed = true)
+        val episodeNavigator = mockk<EpisodeNavigator>(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val viewModel = EpisodeViewModel(useCase, episodeNavigator, errorMapper)
+        val episode = EpisodeDisplayable.mock()
+
+        //when
+        viewModel.onEpisodeClick(episode)
+
+        //then
+        verify { episodeNavigator.openEpisodeDetailsScreen(episode) }
+    }
+
+    @Test
     fun `WHEN episode live data is observed THEN set pending state`() {
         //given
         val useCase = mockk<GetEpisodesUseCase>(relaxed = true)
-        val viewModel = EpisodeViewModel(useCase)
+        val episodeNavigator = mockk<EpisodeNavigator>(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val viewModel = EpisodeViewModel(useCase, episodeNavigator, errorMapper)
 
         //when
         viewModel.episodes.observeForTesting()
@@ -34,7 +56,9 @@ internal class EpisodeViewModelTest : ViewModelTest() {
     fun `WHEN episode live data is observed THEN invoke use case to get episodes`() {
         //given
         val useCase = mockk<GetEpisodesUseCase>(relaxed = true)
-        val viewModel = EpisodeViewModel(useCase)
+        val episodeNavigator = mockk<EpisodeNavigator>(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val viewModel = EpisodeViewModel(useCase, episodeNavigator, errorMapper)
 
         //when
         viewModel.episodes.observeForTesting()
@@ -52,7 +76,9 @@ internal class EpisodeViewModelTest : ViewModelTest() {
                 lastArg<(Result<List<Episode>>) -> Unit>()(Result.success(episodes))
             }
         }
-        val viewModel = EpisodeViewModel(useCase)
+        val episodeNavigator = mockk<EpisodeNavigator>(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val viewModel = EpisodeViewModel(useCase, episodeNavigator, errorMapper)
 
         //when
         viewModel.episodes.observeForTesting()
@@ -77,7 +103,9 @@ internal class EpisodeViewModelTest : ViewModelTest() {
             }
         }
         val observer = mockk<Observer<String>>(relaxed = true)
-        val viewModel = EpisodeViewModel(useCase)
+        val episodeNavigator = mockk<EpisodeNavigator>(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val viewModel = EpisodeViewModel(useCase, episodeNavigator, errorMapper)
 
         //when
         viewModel.message.observeForever(observer)
