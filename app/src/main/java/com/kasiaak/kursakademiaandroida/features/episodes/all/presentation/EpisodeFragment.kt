@@ -13,7 +13,8 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel>(R.layout.fragment_episode
 
     override val viewModel: EpisodeViewModel by viewModel()
 
-    private var episodeAdapter = EpisodeAdapter()
+    private var episodeAdapter =
+        EpisodeAdapter(EpisodeAdapter.OnClickListener { episode -> viewModel.onEpisodeClick(episode) })
     private var progressBar: RelativeLayout? = null
 
     override fun initViews() {

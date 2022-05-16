@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 
-class EpisodeAdapter() : ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(EpisodeDiffCallback) {
+class EpisodeAdapter(
+    private val onClickListener: OnClickListener
+) : ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(EpisodeDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -14,7 +16,11 @@ class EpisodeAdapter() : ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(Epis
     }
 
     override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val episode = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(episode)
+        }
+        holder.bind(episode)
     }
 
     object EpisodeDiffCallback : DiffUtil.ItemCallback<EpisodeDisplayable>() {
@@ -33,5 +39,8 @@ class EpisodeAdapter() : ListAdapter<EpisodeDisplayable, EpisodeViewHolder>(Epis
         }
 
     }
-}
 
+    class OnClickListener(val clickListener: (episode: EpisodeDisplayable) -> Unit) {
+        fun onClick(episode: EpisodeDisplayable) = clickListener(episode)
+    }
+}

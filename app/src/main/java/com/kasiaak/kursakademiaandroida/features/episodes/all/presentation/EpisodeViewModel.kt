@@ -43,8 +43,6 @@ class EpisodeViewModel(
         }
     }
 
-    //TODO("wywolanie funkcji w momencie klikniecia elementu na liście po stronie fragmentu + przekazanie odcinka aktualnie kliknietego")
-
     fun onEpisodeClick(episode: EpisodeDisplayable) {
         episodeNavigator.openEpisodeDetailsScreen(episode)
     }
