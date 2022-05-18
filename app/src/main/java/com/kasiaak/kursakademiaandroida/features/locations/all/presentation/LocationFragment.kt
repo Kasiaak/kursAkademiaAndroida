@@ -1,7 +1,8 @@
-package com.kasiaak.kursakademiaandroida.features.locations.presentation
+package com.kasiaak.kursakademiaandroida.features.locations.all.presentation
 
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kasiaak.kursakademiaandroida.R
@@ -12,7 +13,9 @@ class LocationFragment : BaseFragment<LocationViewModel>(R.layout.fragment_locat
 
     override val viewModel: LocationViewModel by viewModel()
 
-    private var locationAdapter = LocationAdapter()
+    private var locationAdapter = LocationAdapter(LocationAdapter.OnClickListener { location ->
+        viewModel.onLocationClick(location)
+    })
     private var progressBar: RelativeLayout? = null
 
     override fun initViews() {
@@ -23,6 +26,12 @@ class LocationFragment : BaseFragment<LocationViewModel>(R.layout.fragment_locat
             adapter = locationAdapter
             layoutManager = LinearLayoutManager(context)
         }
+        recyclerView?.addItemDecoration(
+            DividerItemDecoration(
+                recyclerView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         progressBar = view?.findViewById(R.id.location_progress_bar)
     }
 

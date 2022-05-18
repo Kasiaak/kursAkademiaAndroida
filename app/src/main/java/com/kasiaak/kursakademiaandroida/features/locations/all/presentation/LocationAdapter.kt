@@ -1,12 +1,14 @@
-package com.kasiaak.kursakademiaandroida.features.locations.presentation
+package com.kasiaak.kursakademiaandroida.features.locations.all.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.kasiaak.kursakademiaandroida.features.locations.presentation.model.LocationDisplayable
+import com.kasiaak.kursakademiaandroida.features.locations.all.presentation.model.LocationDisplayable
 
-class LocationAdapter :
+class LocationAdapter(
+    private val onClickListener: OnClickListener
+) :
     ListAdapter<LocationDisplayable, LocationViewHolder>(LocationDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -14,7 +16,11 @@ class LocationAdapter :
     }
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val location = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(location)
+        }
+        holder.bind(location)
     }
 
     object LocationDiffCallback : DiffUtil.ItemCallback<LocationDisplayable>() {
@@ -31,5 +37,9 @@ class LocationAdapter :
         ): Boolean {
             return oldItem == newItem
         }
+    }
+
+    class OnClickListener(val clickListener: (location: LocationDisplayable) -> Unit) {
+        fun onClick(location: LocationDisplayable) = clickListener(location)
     }
 }

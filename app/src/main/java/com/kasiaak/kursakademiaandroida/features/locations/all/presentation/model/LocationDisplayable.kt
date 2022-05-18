@@ -1,8 +1,10 @@
-package com.kasiaak.kursakademiaandroida.features.locations.presentation.model
+package com.kasiaak.kursakademiaandroida.features.locations.all.presentation.model
 
+import android.os.Parcelable
 import com.kasiaak.kursakademiaandroida.features.locations.domain.model.Location
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class LocationDisplayable(
     val id: Int,
     val name: String,
@@ -10,7 +12,7 @@ data class LocationDisplayable(
     val dimension: String,
     val residents: List<String>,
     val url: String
-) {
+) : Parcelable {
     constructor(location: Location) : this(
         id = location.id,
         name = location.name,

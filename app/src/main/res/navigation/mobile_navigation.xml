@@ -29,9 +29,14 @@
 
     <fragment
         android:id="@+id/locations_screen"
-        android:name="com.kasiaak.kursakademiaandroida.features.locations.presentation.LocationFragment"
+        android:name="com.kasiaak.kursakademiaandroida.features.locations.all.presentation.LocationFragment"
         android:label="@string/title_locations"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location">
+        <action
+            android:id="@+id/action_navigate_from_locations_screen_to_location_details_screen"
+            app:destination="@id/location_details_screen"
+            app:popUpTo="@id/locations_screen" />
+    </fragment>
 
     <fragment
         android:id="@+id/episode_details_screen"
@@ -43,5 +48,10 @@
         android:name="com.kasiaak.kursakademiaandroida.features.characters.details.presentation.CharacterDetailsFragment"
         android:label="@string/title_characters_details"
         tools:layout="@layout/fragment_character_details" />
+    <fragment
+        android:id="@+id/location_details_screen"
+        android:name="com.kasiaak.kursakademiaandroida.features.locations.details.presentation.LocationDetailsFragment"
+        android:label="@string/title_locations_details"
+        tools:layout="@layout/fragment_location_details" />
 
 </navigation>
