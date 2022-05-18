@@ -1,10 +1,12 @@
-package com.kasiaak.kursakademiaandroida.features.characters.presentation.model
+package com.kasiaak.kursakademiaandroida.features.characters.all.presentation.model
 
+import android.os.Parcelable
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class CharacterDisplayable(
     val id: Int,
     val name: String,
@@ -13,11 +15,11 @@ data class CharacterDisplayable(
     val type: String,
     val gender: String,
     val origin: CharacterOriginDisplayable,
-    val lastKnownlocation: CharacterLastKnownLocationDisplayable,
+    val lastKnownLocation: CharacterLastKnownLocationDisplayable,
     val image: String,
     val episode: List<String>,
     val url: String
-) {
+) : Parcelable {
     constructor(character: Character) : this(
         id = character.id,
         name = character.name,
@@ -26,27 +28,29 @@ data class CharacterDisplayable(
         type = character.type,
         gender = character.gender,
         origin = CharacterOriginDisplayable(character.origin),
-        lastKnownlocation = CharacterLastKnownLocationDisplayable(character.lastKnownLocation),
+        lastKnownLocation = CharacterLastKnownLocationDisplayable(character.lastKnownLocation),
         image = character.image,
         episode = character.episode,
         url = character.url
 
     )
 
+    @Parcelize
     data class CharacterOriginDisplayable(
         val name: String,
         val url: String
-    ) {
+    ) : Parcelable {
         constructor(characterOrigin: CharacterOrigin) : this(
             name = characterOrigin.name,
             url = characterOrigin.url
         )
     }
 
+    @Parcelize
     data class CharacterLastKnownLocationDisplayable(
         val name: String,
         val url: String
-    ) {
+    ) : Parcelable {
         constructor(characterLastKnownLocation: CharacterLastKnownLocation) : this(
             name = characterLastKnownLocation.name,
             url = characterLastKnownLocation.url

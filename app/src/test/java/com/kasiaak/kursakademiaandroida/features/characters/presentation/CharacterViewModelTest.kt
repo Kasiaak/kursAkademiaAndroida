@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.kasiaak.kursakademiaandroida.core.base.UiState
 import com.kasiaak.kursakademiaandroida.core.exception.ErrorMapper
+import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterViewModel
 import com.kasiaak.kursakademiaandroida.features.characters.domain.GetCharactersUseCase
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
 import com.kasiaak.kursakademiaandroida.mock.mock

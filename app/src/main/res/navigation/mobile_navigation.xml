@@ -18,18 +18,30 @@
 
     <fragment
         android:id="@+id/characters_screen"
-        android:name="com.kasiaak.kursakademiaandroida.features.characters.presentation.CharacterFragment"
+        android:name="com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterFragment"
         android:label="@string/title_characters"
-        tools:layout="@layout/fragment_character" />
+        tools:layout="@layout/fragment_character">
+        <action
+            android:id="@+id/action_navigate_from_characters_screen_to_character_details_screen"
+            app:destination="@id/character_details_screen"
+            app:popUpTo="@id/characters_screen" />
+    </fragment>
 
     <fragment
         android:id="@+id/locations_screen"
         android:name="com.kasiaak.kursakademiaandroida.features.locations.presentation.LocationFragment"
         android:label="@string/title_locations"
         tools:layout="@layout/fragment_location" />
+
     <fragment
         android:id="@+id/episode_details_screen"
         android:name="com.kasiaak.kursakademiaandroida.features.episodes.details.presentation.EpisodeDetailsFragment"
         android:label="@string/title_episode_details"
         tools:layout="@layout/fragment_episode_details" />
+    <fragment
+        android:id="@+id/character_details_screen"
+        android:name="com.kasiaak.kursakademiaandroida.features.characters.details.presentation.CharacterDetailsFragment"
+        android:label="@string/title_characters_details"
+        tools:layout="@layout/fragment_character_details" />
+
 </navigation>
