@@ -35,6 +35,8 @@ data class CharacterDisplayable(
 
     )
 
+    companion object
+
     @Parcelize
     data class CharacterOriginDisplayable(
         val name: String,
@@ -44,6 +46,8 @@ data class CharacterDisplayable(
             name = characterOrigin.name,
             url = characterOrigin.url
         )
+
+        companion object
     }
 
     @Parcelize
@@ -55,5 +59,7 @@ data class CharacterDisplayable(
             name = characterLastKnownLocation.name,
             url = characterLastKnownLocation.url
         )
+
+        companion object
     }
 }

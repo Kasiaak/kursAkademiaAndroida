@@ -4,9 +4,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.kasiaak.kursakademiaandroida.core.base.UiState
 import com.kasiaak.kursakademiaandroida.core.exception.ErrorMapper
+import com.kasiaak.kursakademiaandroida.core.navigation.FragmentNavigator
 import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterViewModel
+import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.model.CharacterDisplayable
 import com.kasiaak.kursakademiaandroida.features.characters.domain.GetCharactersUseCase
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
+import com.kasiaak.kursakademiaandroida.features.characters.navigation.CharacterNavigatorImpl
 import com.kasiaak.kursakademiaandroida.mock.mock
 import com.kasiaak.kursakademiaandroida.utils.ViewModelTest
 import com.kasiaak.kursakademiaandroida.utils.getOrAwaitValue
@@ -23,7 +26,9 @@ internal class CharacterViewModelTest : ViewModelTest() {
         //given
         val useCase = mockk<GetCharactersUseCase>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = CharacterViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val characterNavigator = CharacterNavigatorImpl(fragmentNavigator)
+        val viewModel = CharacterViewModel(useCase, characterNavigator, errorMapper)
 
         //when
         viewModel.characters.observeForTesting()
@@ -37,7 +42,9 @@ internal class CharacterViewModelTest : ViewModelTest() {
         //given
         val useCase = mockk<GetCharactersUseCase>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = CharacterViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val characterNavigator = CharacterNavigatorImpl(fragmentNavigator)
+        val viewModel = CharacterViewModel(useCase, characterNavigator, errorMapper)
 
         //when
         viewModel.characters.observeForTesting()
@@ -56,7 +63,9 @@ internal class CharacterViewModelTest : ViewModelTest() {
             }
         }
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = CharacterViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val characterNavigator = CharacterNavigatorImpl(fragmentNavigator)
+        val viewModel = CharacterViewModel(useCase, characterNavigator, errorMapper)
 
         //when
         viewModel.characters.observeForTesting()
@@ -82,7 +91,9 @@ internal class CharacterViewModelTest : ViewModelTest() {
         }
         val observer = mockk<Observer<String>>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = CharacterViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val characterNavigator = CharacterNavigatorImpl(fragmentNavigator)
+        val viewModel = CharacterViewModel(useCase, characterNavigator, errorMapper)
 
         //when
         viewModel.message.observeForever(observer)
@@ -91,5 +102,24 @@ internal class CharacterViewModelTest : ViewModelTest() {
         //then
         viewModel.uiState.getOrAwaitValue() shouldBe UiState.Idle
         verify { observer.onChanged(throwable.message) }
+    }
+
+    @Test
+    fun `WHEN character is clicked THEN open characterDetailsScreen`() {
+        //given
+        val useCase: GetCharactersUseCase = mockk(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val characterNavigator = CharacterNavigatorImpl(fragmentNavigator)
+        val viewModel = CharacterViewModel(useCase, characterNavigator, errorMapper)
+        val characterDisplayable = mockk<CharacterDisplayable>(relaxed = true)
+
+        //when
+        viewModel.onCharacterClick(characterDisplayable)
+
+        //then
+        verify {
+            characterNavigator.openCharacterDetailsScreen(characterDisplayable)
+        }
     }
 }

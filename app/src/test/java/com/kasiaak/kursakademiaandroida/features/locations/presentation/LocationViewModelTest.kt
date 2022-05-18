@@ -4,9 +4,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.kasiaak.kursakademiaandroida.core.base.UiState
 import com.kasiaak.kursakademiaandroida.core.exception.ErrorMapper
+import com.kasiaak.kursakademiaandroida.core.navigation.FragmentNavigator
 import com.kasiaak.kursakademiaandroida.features.locations.all.presentation.LocationViewModel
+import com.kasiaak.kursakademiaandroida.features.locations.all.presentation.model.LocationDisplayable
 import com.kasiaak.kursakademiaandroida.features.locations.domain.GetLocationsUseCase
 import com.kasiaak.kursakademiaandroida.features.locations.domain.model.Location
+import com.kasiaak.kursakademiaandroida.features.locations.navigation.LocationNavigatorImpl
 import com.kasiaak.kursakademiaandroida.mock.mock
 import com.kasiaak.kursakademiaandroida.utils.ViewModelTest
 import com.kasiaak.kursakademiaandroida.utils.getOrAwaitValue
@@ -23,7 +26,9 @@ internal class LocationViewModelTest : ViewModelTest() {
         //given
         val useCase = mockk<GetLocationsUseCase>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = LocationViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val locationNavigator = LocationNavigatorImpl(fragmentNavigator)
+        val viewModel = LocationViewModel(useCase, locationNavigator, errorMapper)
 
         //when
         viewModel.locations.observeForTesting()
@@ -37,7 +42,9 @@ internal class LocationViewModelTest : ViewModelTest() {
         //given
         val useCase = mockk<GetLocationsUseCase>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = LocationViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val locationNavigator = LocationNavigatorImpl(fragmentNavigator)
+        val viewModel = LocationViewModel(useCase, locationNavigator, errorMapper)
 
         //when
         viewModel.locations.observeForTesting()
@@ -56,7 +63,9 @@ internal class LocationViewModelTest : ViewModelTest() {
             }
         }
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = LocationViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val locationNavigator = LocationNavigatorImpl(fragmentNavigator)
+        val viewModel = LocationViewModel(useCase, locationNavigator, errorMapper)
 
         //when
         viewModel.locations.observeForTesting()
@@ -83,7 +92,9 @@ internal class LocationViewModelTest : ViewModelTest() {
         }
         val observer = mockk<Observer<String>>(relaxed = true)
         val errorMapper = mockk<ErrorMapper>(relaxed = true)
-        val viewModel = LocationViewModel(useCase, errorMapper)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val locationNavigator = LocationNavigatorImpl(fragmentNavigator)
+        val viewModel = LocationViewModel(useCase, locationNavigator, errorMapper)
 
         //when
         viewModel.message.observeForever(observer)
@@ -92,5 +103,24 @@ internal class LocationViewModelTest : ViewModelTest() {
         //then
         viewModel.uiState.getOrAwaitValue() shouldBe UiState.Idle
         verify { observer.onChanged(throwable.message) }
+    }
+
+    @Test
+    fun `WHEN location is clicked THEN open locationDetailsScreen`() {
+        //given
+        val useCase: GetLocationsUseCase = mockk(relaxed = true)
+        val errorMapper = mockk<ErrorMapper>(relaxed = true)
+        val fragmentNavigator = mockk<FragmentNavigator>(relaxed = true)
+        val locationNavigator = LocationNavigatorImpl(fragmentNavigator)
+        val viewModel = LocationViewModel(useCase, locationNavigator, errorMapper)
+        val locationDisplayable = mockk<LocationDisplayable>(relaxed = true)
+
+        //when
+        viewModel.onLocationClick(locationDisplayable)
+
+        //then
+        verify {
+            locationNavigator.openLocationDetailsScreen(locationDisplayable)
+        }
     }
 }
