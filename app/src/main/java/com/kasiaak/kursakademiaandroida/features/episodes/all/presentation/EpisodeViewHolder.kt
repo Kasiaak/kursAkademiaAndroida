@@ -13,13 +13,9 @@ class EpisodeViewHolder(
 ) : RecyclerView.ViewHolder(inflater.inflate(R.layout.episode_single_item, parent, false)) {
 
     private val episodeName: TextView = itemView.findViewById(R.id.episode_name)
-    /*private val episodeAirDate: TextView = itemView.findViewById(R.id.episode_air_date)
-    private val episodeCharacters: TextView = itemView.findViewById(R.id.episode_characters)*/
 
     fun bind(episodeDisplayable: EpisodeDisplayable) {
         episodeName.text = episodeDisplayable.name
-        /*episodeAirDate.text = episodeDisplayable.airDate
-        episodeCharacters.text = episodeDisplayable.characters.toString()*/
     }
 
 }
