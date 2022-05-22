@@ -1,38 +1,39 @@
 package com.kasiaak.kursakademiaandroida.features.characters.all.presentation
 
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kasiaak.kursakademiaandroida.BR
 import com.kasiaak.kursakademiaandroida.R
 import com.kasiaak.kursakademiaandroida.core.base.BaseFragment
+import com.kasiaak.kursakademiaandroida.databinding.FragmentCharacterBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterFragment : BaseFragment<CharacterViewModel>(R.layout.fragment_character) {
+class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBinding>(
+    BR.characterViewModel,
+    R.layout.fragment_character
+) {
     override val viewModel: CharacterViewModel by viewModel()
 
     private var characterAdapter = CharacterAdapter(CharacterAdapter.OnClickListener { character ->
         viewModel.onCharacterClick(character)
     })
+    private val divider: DividerItemDecoration by inject()
 
-    private var progressBar: RelativeLayout? = null
 
-    override fun initViews() {
-        super.initViews()
-        //initialize all view-related classes
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.character_recycler_view)
-        recyclerView?.apply {
+    override fun initViews(binding: FragmentCharacterBinding) {
+        super.initViews(binding)
+        initRecycler(binding)
+    }
+
+    private fun initRecycler(binding: FragmentCharacterBinding) {
+        with(binding.characterRecyclerView) {
             adapter = characterAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(divider)
+            setHasFixedSize(true)
         }
-        recyclerView?.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-        progressBar = view?.findViewById(R.id.character_progress_bar)
     }
 
     override fun initObservers() {
@@ -42,12 +43,20 @@ class CharacterFragment : BaseFragment<CharacterViewModel>(R.layout.fragment_cha
 
     override fun onIdleState() {
         super.onIdleState()
-        progressBar?.visibility = View.GONE
+        binding?.let { it.characterProgressBar.visibility = View.GONE }
     }
 
     override fun onPendingState() {
         super.onPendingState()
-        progressBar?.visibility = View.VISIBLE
+        binding?.let { it.characterProgressBar.visibility = View.VISIBLE }
+    }
+
+    override fun onDestroyView() {
+        binding?.characterRecyclerView?.let {
+            it.layoutManager = null
+            it.adapter = null
+        }
+        super.onDestroyView()
     }
 
     private fun observeCharacters() {
