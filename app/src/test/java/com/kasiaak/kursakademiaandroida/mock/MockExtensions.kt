@@ -1,14 +1,17 @@
 package com.kasiaak.kursakademiaandroida.mock
 
 import com.kasiaak.kursakademiaandroida.core.api.model.*
+import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.model.CharacterDisplayable
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterCached
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterLastKnownLocationCached
 import com.kasiaak.kursakademiaandroida.features.characters.data.local.model.CharacterOriginCached
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.Character
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterLastKnownLocation
 import com.kasiaak.kursakademiaandroida.features.characters.domain.model.CharacterOrigin
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 import com.kasiaak.kursakademiaandroida.features.episodes.data.local.model.EpisodeCached
 import com.kasiaak.kursakademiaandroida.features.episodes.domain.model.Episode
+import com.kasiaak.kursakademiaandroida.features.locations.all.presentation.model.LocationDisplayable
 import com.kasiaak.kursakademiaandroida.features.locations.data.local.model.LocationCached
 import com.kasiaak.kursakademiaandroida.features.locations.domain.model.Location
 import org.jetbrains.annotations.TestOnly
@@ -181,4 +184,54 @@ fun Location.Companion.mock() = Location(
     dimension = "location dimension",
     residents = emptyList(),
     url = "location url"
+)
+
+@TestOnly
+fun EpisodeDisplayable.Companion.mock() = EpisodeDisplayable(
+    id = 1,
+    name = "episode name",
+    airDate = "episode air date",
+    code = "episode code",
+    characters = emptyList(),
+    url = "episode url"
+)
+
+@TestOnly
+fun CharacterDisplayable.Companion.mock() = CharacterDisplayable(
+    id = 1,
+    name = "character name",
+    status = "character status",
+    species = "character species",
+    type = "character type",
+    gender = "character gender",
+    origin = CharacterDisplayable.CharacterOriginDisplayable.mock(),
+    lastKnownLocation = CharacterDisplayable.CharacterLastKnownLocationDisplayable.Companion.mock(),
+    image = "character image",
+    episode = emptyList(),
+    url = "episode url"
+
+)
+
+@TestOnly
+fun CharacterDisplayable.CharacterOriginDisplayable.Companion.mock() =
+    CharacterDisplayable.CharacterOriginDisplayable(
+        name = "character origin displayable name",
+        url = "character origin displayable url"
+    )
+
+@TestOnly
+fun CharacterDisplayable.CharacterLastKnownLocationDisplayable.Companion.mock() =
+    CharacterDisplayable.CharacterLastKnownLocationDisplayable(
+        name = "character last known location displayable name",
+        url = "character last known location displayable url"
+    )
+
+@TestOnly
+fun LocationDisplayable.Companion.mock() = LocationDisplayable(
+    id = 1,
+    name = "location displayable name",
+    type = "location displayable type",
+    dimension = "location displayable dimension",
+    residents = emptyList(),
+    url = "location displayable url"
 )

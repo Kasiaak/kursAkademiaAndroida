@@ -13,7 +13,7 @@
         android:text="Character name"
         android:textStyle="bold" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/character_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:paddingLeft="16dp"
-        android:text="Character episode" />
+        android:text="Character episode" />-->
 
 </LinearLayout>
