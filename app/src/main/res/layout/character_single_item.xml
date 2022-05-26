@@ -1,56 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/character_name"
-        android:layout_width="wrap_content"
+    <data>
+
+        <import type="com.kasiaak.kursakademiaandroida.R" />
+
+        <variable
+            name="item"
+            type="com.kasiaak.kursakademiaandroida.features.characters.all.presentation.model.CharacterDisplayable" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character name"
-        android:textStyle="bold" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    <!--<TextView
-        android:id="@+id/character_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character status" />
+        <TextView
+            android:id="@+id/character_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{item.name}"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/character_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character type" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/character_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character gender" />
+        <ImageView
+            android:id="@+id/characterImage"
+            android:layout_width="186dp"
+            android:layout_height="166dp"
+            android:layout_gravity="right"
+            android:padding="24dp"
+            app:imageUrl="@{item.image}"
+            app:placeholder="@{R.drawable.ic_baseline_image_24}" />
 
-    <TextView
-        android:id="@+id/character_last_known_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character last known location" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/character_episode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Character episode" />-->
-
-</LinearLayout>
+</layout>

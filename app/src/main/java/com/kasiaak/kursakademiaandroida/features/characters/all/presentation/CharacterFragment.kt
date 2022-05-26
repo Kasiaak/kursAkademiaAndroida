@@ -1,6 +1,5 @@
 package com.kasiaak.kursakademiaandroida.features.characters.all.presentation
 
-import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kasiaak.kursakademiaandroida.BR
@@ -16,10 +15,9 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
 ) {
     override val viewModel: CharacterViewModel by viewModel()
 
-    private var characterAdapter = CharacterAdapter(CharacterAdapter.OnClickListener { character ->
-        viewModel.onCharacterClick(character)
-    })
+    private val characterAdapter: CharacterAdapter by inject()
     private val divider: DividerItemDecoration by inject()
+    private val linearLayoutManager: LinearLayoutManager by inject()
 
 
     override fun initViews(binding: FragmentCharacterBinding) {
@@ -30,26 +28,16 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
     private fun initRecycler(binding: FragmentCharacterBinding) {
         with(binding.characterRecyclerView) {
             adapter = characterAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = linearLayoutManager
             addItemDecoration(divider)
             setHasFixedSize(true)
         }
     }
 
-    override fun initObservers() {
+    /*override fun initObservers() {
         super.initObservers()
         observeCharacters()
-    }
-
-    override fun onIdleState() {
-        super.onIdleState()
-        binding?.let { it.characterProgressBar.visibility = View.GONE }
-    }
-
-    override fun onPendingState() {
-        super.onPendingState()
-        binding?.let { it.characterProgressBar.visibility = View.VISIBLE }
-    }
+    }*/
 
     override fun onDestroyView() {
         binding?.characterRecyclerView?.let {
@@ -59,10 +47,10 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
         super.onDestroyView()
     }
 
-    private fun observeCharacters() {
+    /*private fun observeCharacters() {
         viewModel.characters.observe(this) {
             //display characters
             characterAdapter.submitList(it)
         }
-    }
+    }*/
 }

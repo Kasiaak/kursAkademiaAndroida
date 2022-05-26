@@ -24,7 +24,7 @@ object BindingAdapters {
         (recyclerView.adapter as? BindableAdapter<T>)?.setItems(items)
     }
 
-    @BindingAdapter(value = ["app:items", "app:placeholder"], requireAll = false)
+    @BindingAdapter(value = ["app:imageUrl", "app:placeholder"], requireAll = false)
     @JvmStatic
     fun <T> setImage(imageView: ImageView, imageUrl: String, @DrawableRes placeholder: Int) {
         Glide.with(imageView.context)
