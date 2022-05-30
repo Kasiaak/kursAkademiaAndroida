@@ -15,9 +15,11 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
 ) {
     override val viewModel: EpisodeViewModel by viewModel()
 
-    private val episodeAdapter: EpisodeAdapter by inject()
+    private val episodeAdapter =
+        EpisodeAdapter(EpisodeAdapter.OnClickListener { episode -> viewModel.onEpisodeClick(episode) })
     private val divider: DividerItemDecoration by inject()
     private val linearLayoutManager: LinearLayoutManager by inject()
+
 
     override fun initViews(binding: FragmentEpisodeBinding) {
         super.initViews(binding)
@@ -33,6 +35,7 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
         }
     }
 
+
     /*override fun initObservers() {
         super.initObservers()
         observeEpisodes()
@@ -45,6 +48,12 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
         }
         super.onDestroyView()
     }
+
+    /*override fun onClick(position: Int) {
+        viewModel.episodes.value?.get(position)?.let {
+            viewModel.onEpisodeClick(it)
+        }
+    }*/
 
     /* private fun observeEpisodes() {
          viewModel.episodes.observe(this) {

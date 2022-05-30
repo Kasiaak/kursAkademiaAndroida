@@ -28,17 +28,5 @@
             tools:text="S01E01: Pilot"
             android:textStyle="bold" />
 
-        <!--<ImageView
-            android:id="@+id/episodeImage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            app:imageUrl="@{item.url}"
-            app:placeholder="@{R.drawable.ic_baseline_image_24}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constratintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constratintTop_ToBottomOf="@+id/episode_name" />-->
-
     </LinearLayout>
 </layout>

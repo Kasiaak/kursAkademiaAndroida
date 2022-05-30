@@ -23,7 +23,7 @@ val episodeModule = module {
     //presentation
     viewModel { EpisodeViewModel(get(), get(), get()) }
     factory { EpisodeFragment() }
-    factory { EpisodeAdapter() }
+    factory { EpisodeAdapter(get()) }
     factory<EpisodeNavigator> { EpisodeNavigatorImpl(get()) }
     viewModel { EpisodeDetailsViewModel() }
     factory { EpisodeDetailsFragment() }

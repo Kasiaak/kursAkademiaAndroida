@@ -7,8 +7,9 @@ import com.kasiaak.kursakademiaandroida.core.adapter.BindableAdapter
 import com.kasiaak.kursakademiaandroida.databinding.EpisodeSingleItemBinding
 import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable
 
-class EpisodeAdapter
-    : BindableAdapter<EpisodeDisplayable>,
+class EpisodeAdapter(
+    private val onClickListener: OnClickListener
+) : BindableAdapter<EpisodeDisplayable>,
     RecyclerView.Adapter<EpisodeViewHolder>() {
     private val episodes = mutableListOf<EpisodeDisplayable>()
 
@@ -27,9 +28,13 @@ class EpisodeAdapter
 
     override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
         val episode = episodes[position]
+        holder.itemView.setOnClickListener { onClickListener.onClick(episode) }
         holder.bind(episode)
     }
 
     override fun getItemCount(): Int = episodes.size
 
+    class OnClickListener(val clickListener: (episode: EpisodeDisplayable) -> Unit) {
+        fun onClick(episode: EpisodeDisplayable) = clickListener(episode)
+    }
 }
