@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,20 +9,84 @@
             type="com.kasiaak.kursakademiaandroida.features.characters.details.presentation.CharacterDetailsViewModel" />
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
         tools:context=".features.characters.details.presentation.CharacterDetailsFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/character_details_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        <TextView
+            android:id="@+id/character_details_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.name}"
+            tools:text="Character name"
+            android:textStyle="bold" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/character_details_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.status}"
+            tools:text="Character status" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/character_details_species"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.species}"
+            tools:text="Character species" />
+
+        <TextView
+            android:id="@+id/character_details_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.type}"
+            tools:text="Character type" />
+
+        <TextView
+            android:id="@+id/character_details_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.gender}"
+            tools:text="Character gender" />
+
+        <TextView
+            android:id="@+id/character_details_origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.origin.name}"
+            tools:text="Character origin" />
+
+        <TextView
+            android:id="@+id/character_details_last_known_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.lastKnownLocation.name}"
+            tools:text="Character last known location" />
+
+        <TextView
+            android:id="@+id/character_details_episodes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{characterDetailsViewModel.character.episode.toString()}"
+            tools:text="Character episodes" />
+    </LinearLayout>
+
 </layout>

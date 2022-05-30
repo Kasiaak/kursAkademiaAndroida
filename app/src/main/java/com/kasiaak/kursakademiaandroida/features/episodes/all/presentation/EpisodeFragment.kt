@@ -36,11 +36,6 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
     }
 
 
-    /*override fun initObservers() {
-        super.initObservers()
-        observeEpisodes()
-    }*/
-
     override fun onDestroyView() {
         binding?.episodeRecyclerView?.let {
             it.layoutManager = null
@@ -49,16 +44,4 @@ class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
         super.onDestroyView()
     }
 
-    /*override fun onClick(position: Int) {
-        viewModel.episodes.value?.get(position)?.let {
-            viewModel.onEpisodeClick(it)
-        }
-    }*/
-
-    /* private fun observeEpisodes() {
-         viewModel.episodes.observe(this) {
-             //display episodes
-             episodeAdapter.setItems(it)
-         }
-     }*/
 }

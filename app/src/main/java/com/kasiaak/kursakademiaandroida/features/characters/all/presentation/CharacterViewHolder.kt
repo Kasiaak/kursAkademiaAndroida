@@ -7,12 +7,10 @@ import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.mod
 class CharacterViewHolder(
     private val binding: CharacterSingleItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-    var listener: ((CharacterDisplayable) -> Unit)? = null
 
     fun bind(characterDisplayable: CharacterDisplayable) {
         with(binding) {
             binding.item = characterDisplayable
-            listener?.let { root.setOnClickListener { it(characterDisplayable) } }
             binding.executePendingBindings()
         }
     }

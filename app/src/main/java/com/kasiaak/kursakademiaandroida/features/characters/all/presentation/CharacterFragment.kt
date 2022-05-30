@@ -15,7 +15,12 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
 ) {
     override val viewModel: CharacterViewModel by viewModel()
 
-    private val characterAdapter: CharacterAdapter by inject()
+    private val characterAdapter =
+        CharacterAdapter(CharacterAdapter.OnClickListener { character ->
+            viewModel.onCharacterClick(
+                character
+            )
+        })
     private val divider: DividerItemDecoration by inject()
     private val linearLayoutManager: LinearLayoutManager by inject()
 
@@ -34,11 +39,6 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
         }
     }
 
-    /*override fun initObservers() {
-        super.initObservers()
-        observeCharacters()
-    }*/
-
     override fun onDestroyView() {
         binding?.characterRecyclerView?.let {
             it.layoutManager = null
@@ -47,10 +47,4 @@ class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBind
         super.onDestroyView()
     }
 
-    /*private fun observeCharacters() {
-        viewModel.characters.observe(this) {
-            //display characters
-            characterAdapter.submitList(it)
-        }
-    }*/
 }

@@ -7,8 +7,9 @@ import com.kasiaak.kursakademiaandroida.core.adapter.BindableAdapter
 import com.kasiaak.kursakademiaandroida.databinding.CharacterSingleItemBinding
 import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.model.CharacterDisplayable
 
-class CharacterAdapter
-    : BindableAdapter<CharacterDisplayable>,
+class CharacterAdapter(
+    private val onClickListener: OnClickListener
+) : BindableAdapter<CharacterDisplayable>,
     RecyclerView.Adapter<CharacterViewHolder>() {
     private val characters = mutableListOf<CharacterDisplayable>()
 
@@ -29,10 +30,14 @@ class CharacterAdapter
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = characters[position]
+        holder.itemView.setOnClickListener { onClickListener.onClick(character) }
         holder.bind(character)
     }
 
-
     override fun getItemCount(): Int = characters.size
+
+    class OnClickListener(val clickListener: (character: CharacterDisplayable) -> Unit) {
+        fun onClick(character: CharacterDisplayable) = clickListener(character)
+    }
 
 }
