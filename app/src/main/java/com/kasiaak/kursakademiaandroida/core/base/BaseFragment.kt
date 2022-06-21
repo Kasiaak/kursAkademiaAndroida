@@ -5,24 +5,40 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<T : BaseViewModel>(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
+abstract class BaseFragment<T : BaseViewModel, S : ViewDataBinding>(
+    private val viewModelId: Int,
+    @LayoutRes layoutRes: Int
+) : Fragment(layoutRes) {
 
     abstract val viewModel: T
+    var binding: S? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
+        binding = DataBindingUtil.bind(view)
+        binding?.let {
+            it.lifecycleOwner = viewLifecycleOwner
+            it.setVariable(viewModelId, viewModel)
+            initViews(it)
+        }
         initObservers()
         bindViewModelToLifecycle()
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 
     private fun bindViewModelToLifecycle() {
         lifecycle.addObserver(viewModel)
     }
 
-    open fun initViews() {
+    open fun initViews(binding: S) {
 
     }
 

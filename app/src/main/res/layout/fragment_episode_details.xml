@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".features.episodes.details.presentation.EpisodeDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/episode_details_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+    <data>
 
-    </androidx.recyclerview.widget.RecyclerView>
-</FrameLayout>
+        <variable
+            name="episodeDetailsViewModel"
+            type="com.kasiaak.kursakademiaandroida.features.episodes.details.presentation.EpisodeDetailsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".features.episodes.details.presentation.EpisodeDetailsFragment">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{episodeDetailsViewModel.episode.fullName}"
+            tools:text="Episode full name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{episodeDetailsViewModel.episode.airDate}"
+            tools:text="Episode air date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{episodeDetailsViewModel.episode.characters.toString()}"
+            tools:text="Episode characters" />
+    </LinearLayout>
+</layout>

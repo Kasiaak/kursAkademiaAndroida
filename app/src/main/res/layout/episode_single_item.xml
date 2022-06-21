@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center_horizontal"
-    android:padding="16dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/episode_name"
-        android:layout_width="wrap_content"
+    <data>
+
+        <import type="com.kasiaak.kursakademiaandroida.R" />
+
+        <variable
+            name="item"
+            type="com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.model.EpisodeDisplayable" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="Episode name"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/episode_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:text="@{item.fullName}"
+            tools:text="S01E01: Pilot"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>

@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".features.locations.all.presentation.LocationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/location_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <variable
+            name="locationViewModel"
+            type="com.kasiaak.kursakademiaandroida.features.locations.all.presentation.LocationViewModel" />
+    </data>
 
-    <RelativeLayout
-        android:id="@+id/location_progress_bar"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:visibility="gone">
+        tools:context=".features.locations.all.presentation.LocationFragment">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:theme="@style/Widget.AppCompat.ProgressBar" />
-    </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/location_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</FrameLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+            android:id="@+id/location_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:theme="@style/Widget.AppCompat.ProgressBar" />
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

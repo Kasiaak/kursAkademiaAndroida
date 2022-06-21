@@ -1,5 +1,6 @@
 package com.kasiaak.kursakademiaandroida.features.characters.di
 
+import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterAdapter
 import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterFragment
 import com.kasiaak.kursakademiaandroida.features.characters.all.presentation.CharacterViewModel
 import com.kasiaak.kursakademiaandroida.features.characters.data.repository.CharacterRepositoryImpl
@@ -22,6 +23,7 @@ val characterModule = module {
     //presentation
     viewModel { CharacterViewModel(get(), get(), get()) }
     factory { CharacterFragment() }
+    factory { CharacterAdapter(get()) }
     factory<CharacterNavigator> { CharacterNavigatorImpl(get()) }
     viewModel { CharacterDetailsViewModel() }
     factory { CharacterDetailsFragment() }

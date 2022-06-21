@@ -1,5 +1,6 @@
 package com.kasiaak.kursakademiaandroida.features.episodes.di
 
+import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.EpisodeAdapter
 import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.EpisodeFragment
 import com.kasiaak.kursakademiaandroida.features.episodes.all.presentation.EpisodeViewModel
 import com.kasiaak.kursakademiaandroida.features.episodes.data.repository.EpisodeRepositoryImpl
@@ -22,6 +23,7 @@ val episodeModule = module {
     //presentation
     viewModel { EpisodeViewModel(get(), get(), get()) }
     factory { EpisodeFragment() }
+    factory { EpisodeAdapter(get()) }
     factory<EpisodeNavigator> { EpisodeNavigatorImpl(get()) }
     viewModel { EpisodeDetailsViewModel() }
     factory { EpisodeDetailsFragment() }

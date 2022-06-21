@@ -1,59 +1,47 @@
 package com.kasiaak.kursakademiaandroida.features.episodes.all.presentation
 
-import android.view.View
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kasiaak.kursakademiaandroida.BR
 import com.kasiaak.kursakademiaandroida.R
 import com.kasiaak.kursakademiaandroida.core.base.BaseFragment
+import com.kasiaak.kursakademiaandroida.databinding.FragmentEpisodeBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EpisodeFragment : BaseFragment<EpisodeViewModel>(R.layout.fragment_episode) {
-
+class EpisodeFragment : BaseFragment<EpisodeViewModel, FragmentEpisodeBinding>(
+    BR.episodeViewModel,
+    R.layout.fragment_episode
+) {
     override val viewModel: EpisodeViewModel by viewModel()
 
-    private var episodeAdapter =
+    private val episodeAdapter =
         EpisodeAdapter(EpisodeAdapter.OnClickListener { episode -> viewModel.onEpisodeClick(episode) })
-    private var progressBar: RelativeLayout? = null
+    private val divider: DividerItemDecoration by inject()
+    private val linearLayoutManager: LinearLayoutManager by inject()
 
-    override fun initViews() {
-        super.initViews()
-        //initialize all view-related classes
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.episode_recycler_view)
-        recyclerView?.apply {
+
+    override fun initViews(binding: FragmentEpisodeBinding) {
+        super.initViews(binding)
+        initRecycler(binding)
+    }
+
+    private fun initRecycler(binding: FragmentEpisodeBinding) {
+        with(binding.episodeRecyclerView) {
             adapter = episodeAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = linearLayoutManager
+            addItemDecoration(divider)
+            setHasFixedSize(true)
         }
-        recyclerView?.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-        progressBar = view?.findViewById(R.id.episode_progress_bar)
     }
 
-    override fun initObservers() {
-        super.initObservers()
-        observeEpisodes()
-    }
 
-    override fun onIdleState() {
-        super.onIdleState()
-        progressBar?.visibility = View.GONE
-    }
-
-    override fun onPendingState() {
-        super.onPendingState()
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    private fun observeEpisodes() {
-        viewModel.episodes.observe(this) {
-            //display episodes
-            episodeAdapter.submitList(it)
+    override fun onDestroyView() {
+        binding?.episodeRecyclerView?.let {
+            it.layoutManager = null
+            it.adapter = null
         }
+        super.onDestroyView()
     }
 
 }

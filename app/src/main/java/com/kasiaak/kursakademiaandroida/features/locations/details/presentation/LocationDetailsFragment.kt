@@ -1,15 +1,19 @@
 package com.kasiaak.kursakademiaandroida.features.locations.details.presentation
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kasiaak.kursakademiaandroida.BR
 import com.kasiaak.kursakademiaandroida.R
 import com.kasiaak.kursakademiaandroida.core.base.BaseFragment
+import com.kasiaak.kursakademiaandroida.databinding.FragmentLocationDetailsBinding
 import com.kasiaak.kursakademiaandroida.features.locations.all.presentation.model.LocationDisplayable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LocationDetailsFragment :
-    BaseFragment<LocationDetailsViewModel>(R.layout.fragment_location_details) {
+    BaseFragment<LocationDetailsViewModel, FragmentLocationDetailsBinding>(
+        BR.locationDetailsViewModel,
+        R.layout.fragment_location_details
+    ) {
     override val viewModel: LocationDetailsViewModel by viewModel()
     private var locationDetailsAdapter = LocationDetailsAdapter()
 
@@ -17,12 +21,16 @@ class LocationDetailsFragment :
         const val LOCATION_DETAILS_KEY = "locationDetailsKey"
     }
 
-    override fun initViews() {
-        super.initViews()
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.location_details_recycler_view)
-        recyclerView?.apply {
+    override fun initViews(binding: FragmentLocationDetailsBinding) {
+        super.initViews(binding)
+        initRecycler(binding)
+    }
+
+    private fun initRecycler(binding: FragmentLocationDetailsBinding) {
+        with(binding.locationDetailsRecyclerView) {
             adapter = locationDetailsAdapter
             layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
         }
     }
 
@@ -33,6 +41,14 @@ class LocationDetailsFragment :
                 viewModel.passLocation(it)
                 locationDetailsAdapter.submitList(listOf(it))
             }
+    }
+
+    override fun onDestroyView() {
+        binding?.locationDetailsRecyclerView?.let {
+            it.layoutManager = null
+            it.adapter = null
+        }
+        super.onDestroyView()
     }
 
 }

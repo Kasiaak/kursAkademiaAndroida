@@ -1,59 +1,50 @@
 package com.kasiaak.kursakademiaandroida.features.characters.all.presentation
 
-import android.view.View
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kasiaak.kursakademiaandroida.BR
 import com.kasiaak.kursakademiaandroida.R
 import com.kasiaak.kursakademiaandroida.core.base.BaseFragment
+import com.kasiaak.kursakademiaandroida.databinding.FragmentCharacterBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterFragment : BaseFragment<CharacterViewModel>(R.layout.fragment_character) {
+class CharacterFragment : BaseFragment<CharacterViewModel, FragmentCharacterBinding>(
+    BR.characterViewModel,
+    R.layout.fragment_character
+) {
     override val viewModel: CharacterViewModel by viewModel()
 
-    private var characterAdapter = CharacterAdapter(CharacterAdapter.OnClickListener { character ->
-        viewModel.onCharacterClick(character)
-    })
-
-    private var progressBar: RelativeLayout? = null
-
-    override fun initViews() {
-        super.initViews()
-        //initialize all view-related classes
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.character_recycler_view)
-        recyclerView?.apply {
-            adapter = characterAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-        recyclerView?.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                DividerItemDecoration.VERTICAL
+    private val characterAdapter =
+        CharacterAdapter(CharacterAdapter.OnClickListener { character ->
+            viewModel.onCharacterClick(
+                character
             )
-        )
-        progressBar = view?.findViewById(R.id.character_progress_bar)
+        })
+    private val divider: DividerItemDecoration by inject()
+    private val linearLayoutManager: LinearLayoutManager by inject()
+
+
+    override fun initViews(binding: FragmentCharacterBinding) {
+        super.initViews(binding)
+        initRecycler(binding)
     }
 
-    override fun initObservers() {
-        super.initObservers()
-        observeCharacters()
-    }
-
-    override fun onIdleState() {
-        super.onIdleState()
-        progressBar?.visibility = View.GONE
-    }
-
-    override fun onPendingState() {
-        super.onPendingState()
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    private fun observeCharacters() {
-        viewModel.characters.observe(this) {
-            //display characters
-            characterAdapter.submitList(it)
+    private fun initRecycler(binding: FragmentCharacterBinding) {
+        with(binding.characterRecyclerView) {
+            adapter = characterAdapter
+            layoutManager = linearLayoutManager
+            addItemDecoration(divider)
+            setHasFixedSize(true)
         }
     }
+
+    override fun onDestroyView() {
+        binding?.characterRecyclerView?.let {
+            it.layoutManager = null
+            it.adapter = null
+        }
+        super.onDestroyView()
+    }
+
 }

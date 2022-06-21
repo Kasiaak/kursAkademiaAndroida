@@ -12,7 +12,7 @@ ext {
     def constraintlayoutVersion = "2.1.2"
     def materialVersion = "1.4.0"
     def recyclerviewVersion = "1.2.1"
-    def glideVersion = "4.12.0"
+    def glideVersion = "4.13.0"
 
     uiDependencies = [
             constraintlayout : "androidx.constraintlayout:constraintlayout:" + constraintlayoutVersion,

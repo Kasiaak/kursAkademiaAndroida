@@ -1,38 +1,40 @@
 package com.kasiaak.kursakademiaandroida.features.locations.all.presentation
 
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.kasiaak.kursakademiaandroida.BR
 import com.kasiaak.kursakademiaandroida.R
 import com.kasiaak.kursakademiaandroida.core.base.BaseFragment
+import com.kasiaak.kursakademiaandroida.databinding.FragmentLocationBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LocationFragment : BaseFragment<LocationViewModel>(R.layout.fragment_location) {
+class LocationFragment : BaseFragment<LocationViewModel, FragmentLocationBinding>(
+    BR.locationViewModel,
+    R.layout.fragment_location
+) {
 
     override val viewModel: LocationViewModel by viewModel()
 
     private var locationAdapter = LocationAdapter(LocationAdapter.OnClickListener { location ->
         viewModel.onLocationClick(location)
     })
-    private var progressBar: RelativeLayout? = null
 
-    override fun initViews() {
-        super.initViews()
-        //initialize all view-related classes
-        val recyclerView = view?.findViewById<RecyclerView>(R.id.location_recycler_view)
-        recyclerView?.apply {
+    private val divider: DividerItemDecoration by inject()
+
+    override fun initViews(binding: FragmentLocationBinding) {
+        super.initViews(binding)
+        initRecycler(binding)
+    }
+
+    private fun initRecycler(binding: FragmentLocationBinding) {
+        with(binding.locationRecyclerView) {
             adapter = locationAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(divider)
+            setHasFixedSize(true)
         }
-        recyclerView?.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
-        progressBar = view?.findViewById(R.id.location_progress_bar)
     }
 
     override fun initObservers() {
@@ -42,12 +44,20 @@ class LocationFragment : BaseFragment<LocationViewModel>(R.layout.fragment_locat
 
     override fun onIdleState() {
         super.onIdleState()
-        progressBar?.visibility = View.GONE
+        binding?.let { it.locationProgressBar.visibility = View.GONE }
     }
 
     override fun onPendingState() {
         super.onPendingState()
-        progressBar?.visibility = View.VISIBLE
+        binding?.let { it.locationProgressBar.visibility = View.VISIBLE }
+    }
+
+    override fun onDestroyView() {
+        binding?.locationRecyclerView?.let {
+            it.layoutManager = null
+            it.adapter = null
+        }
+        super.onDestroyView()
     }
 
     private fun observeLocations() {
